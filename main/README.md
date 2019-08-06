@@ -1,5 +1,5 @@
-## Interactive BO for setwise, linewise, and pathwise comparison.
-# how to write history file 
+# Interactive BO for setwise, linewise, and pathwise comparison.
+## how to write history file 
 
 * This system gets observed information from a text file and returns the next candidates.
 * The history file should be deleted when you start another optimization.
