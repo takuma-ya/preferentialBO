@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>user test</title>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+</head>
+
+<script type="text/javascript">
+$(function () {
+  $.ajax({
+    url:'log/residual.txt',
+    success: function(data){
+      var data_array = data.split("\n");  // 改行コードで分割
+      var len = data_array.length;
+      if(len!=11){
+          alert(String(len)+"回目の試行");}
+      else{
+          alert("終了です。お疲れ様でした。");}
+      }
+    })
+  })
+</script>
+
+
+<body>
+<div align="center">
+<header>
+    <h1>color enhancement system</h1>
+</header>
+<img src="img/reference/reference.jpg" width="20%">
+<p>reference</p>
+<br>
+<br>
+<br>
+<img id="img" src="img/slider/0.jpg" width="20%">
+<p><input type="range" id="range" value="0" min="0" max="9" step="1"></p>
+<form id="form">
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+<div id="result"></div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function() {
+      $('#range').mousemove(function() {
+          var range = $('#range').val();
+          $('#img').attr('src', 'img/slider/'+range+'.jpg');
+      })
+    })
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+      $('#range').change(function() {
+          var range = $('#range').val();
+          $('#img').attr('src', 'img/slider/'+range+'.jpg');
+      })
+    })
+</script>
+
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#form').submit(function() {
+      event.preventDefault();
+      var $form = $(this);
+      $.ajax({
+        url: 'http://localhost:8000/cgi-bin/step.py',
+        type: 'post',
+          dataType: 'text',
+          data: {
+            number: $('#range').val()
+          },
+      })
+          .done(function(response) {
+            $('#result').html(response);
+            location.reload(true);
+        }) 
+      });
+    });
+</script>
+
+
+</body>
+</html>
+

@@ -1,0 +1,7 @@
+.DS_Store
+DIRresults.txt
+__pycache__
+.DS_Store
+.ipynb_checkpoints
+web_application/log/
+web_application/img/slider/
