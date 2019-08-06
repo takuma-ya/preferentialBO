@@ -41,4 +41,3 @@
 - original: there is an original picture
 - reference: there is an reference picture
 - slider: there are generated pictures corresponding to a slider
--
