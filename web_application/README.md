@@ -1,14 +1,15 @@
-Environment
- python3.7
- colormath3.0.0
- numpy1.15.1
- scipy1.1.0
- DIRECT1.0.0
- PIL5.2.0
- sklearn0.19.2
+##Environment
+
+- python3.7
+- colormath3.0.0
+- numpy1.15.1
+- scipy1.1.0
+- DIRECT1.0.0
+- PIL5.2.0
+- sklearn0.19.2
   
 
-Usage
+##Usage
 
 1. ./color_enhancement_system.sh 
 2. launch a browser
@@ -17,7 +18,7 @@ Usage
     python color_difference_cie2000.py
 
 
-Log Files
+##Log Files
 
 - history.txt: used in program
 - negative_representives.npy:	used in program
@@ -27,7 +28,7 @@ Log Files
 - selected_param.txt: selected parameters from a user
 
 
-Program Files
+##Program Files
 - color_difference_cie2000.py: calculate color difference
 - init.py: initialization 
 - step.py: called at each round
@@ -35,7 +36,7 @@ Program Files
 - interactive_bo.py: library file for interactive BO
 
 
-Image Dir
+##Image Dir
 
 - original: there is an original picture
 - reference: there is an reference picture
