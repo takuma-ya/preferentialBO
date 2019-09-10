@@ -1,10 +1,10 @@
 import numpy as np
 import itertools
-from scipy.optimize import basinhopping, fsolve, minimize
+import DIRECT
+from scipy.optimize import fsolve, minimize
 from scipy.stats import norm, lognorm
 from sympy import *
 from sklearn.metrics.pairwise import euclidean_distances
-import DIRECT
 import copy
 import os
 
@@ -17,13 +17,6 @@ Gran = 10 #hyperparameter of optimization
 class Interactive_BO():
 
     def __init__(self, bound, filepath, mode="linewise", sgm=1, theta_fixed=True):
-        try:
-            import DIRECT
-        except(ImportError):
-            self.use_direct = False
-        else:
-            self.use_direct = True 
-
         self._theta_fixed = theta_fixed
         self._bound = np.array(bound)
         assert len(self._bound.shape) == 2
@@ -168,8 +161,10 @@ class Interactive_BO():
         else:
             x_max = last_selected[0]
 
+        # use DIRECT algorithm
         x_argmax_sd, _, _ = DIRECT.solve(obj_sd, self._bound[:,0], self._bound[:,1],
                                  maxf=1000, algmethod=1)
+	
 
         pivots = np.array([np.linspace(x_max[i],x_argmax_sd[i],N) for i in range(len(x_max))]).T
 
@@ -362,16 +357,9 @@ class Interactive_BO():
         def obj(x,data):
             return (-self.expected_improvement([x]),0)
 
-        if self.use_direct:
         # use DIRECT algorithm
-            x, _, _ = DIRECT.solve(obj, self._bound[:,0], self._bound[:,1],
-                                     maxf=1000, algmethod=1)
-
-        else:
-        # use basinhopping
-            res = basinhopping(obj, (self._bound[:,0]+self._bound[:,1]),
-                    minimizer_kwargs={'bounds':self._bound})
-            x = res.x
+        x, _, _ = DIRECT.solve(obj, self._bound[:,0], self._bound[:,1],
+                                 maxf=1000, algmethod=1)
 
         return x
 
