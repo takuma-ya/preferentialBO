@@ -19,7 +19,7 @@
                         .  
 
    
-* When pairwise comparison case, 
+* ex. pairwise comparison case, 
 
 (selected input)>(not selected input)
 

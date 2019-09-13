@@ -1,6 +1,6 @@
 #!/bin/bash
 
-METHOD="pathwise" 
+METHOD="linewise" 
 export METHOD
 
 python cgi-bin/init.py

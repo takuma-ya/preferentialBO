@@ -40,14 +40,14 @@ if(os.environ['METHOD'] == 'linewise'):
 elif(os.environ['METHOD'] == 'pathwise'):
     model = Interactive_BO([[0,1],[0,1],[0,1]],'log/history.txt', mode='pathwise', sgm=1)
     candidates = np.array(model.query(last_selected=[path[int(n)]],N=10))
+    path = candidates
     try:
         ei_max = np.argmax(model.expected_improvement(candidates))
         if ei_max == 0:
-            ei_max = len(line)-1
+            ei_max = len(path)-1
     except:
-        ei_max = len(line)-1
-    negative_representives = np.array([candidates[0], candidates[ei_max]])
-    path = candidates
+        ei_max = len(path)-1
+    negative_representives = np.array([path[0], path[ei_max]])
 
 else:
     print("There isn't such a method")
